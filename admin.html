@@ -99,8 +99,54 @@
 
     </div>
     <script>
+        let fleetData =[];
+        functon renderCards(data) {
+            let container = document.getElementById("content");
+            container.innerHTML ="";
+            data.forEach(item => { let card =document.createElement("div");
+            card.className ="card";
+            card.innerHTML = <img src=" Sample Vehicle Link" alt="Vehicle">
+            <h3>${item.category} </h3>
+            <p> <strong> Reg No: </strong> ${item.reg}</p>
+            <p> <strong> Driver: </strong> <span class="driverName">${item.driver}</span></p>
+            <p> <strong> Status: </strong> <span class="status">${item.availability}</span></p>
+            <button class="updateBtn">Update
+Driver </button>
+<button class="updateBtn">Update Driver </button> 
+<button class="availabilityBtn">Change availability </button>
+<button class="deleteBtn">Delete Vehicle</button>
+;
+container.appendChild(card);
+card.querySelector(".updateBtn").onclick = function() {
+    let newDriver =prompt("Enter new driver name:"");
+    if (!newDriver || newDriver.trim() ==="") {
+        alert("Driver name cannot be empty!");
+        return;
+    }
+    item.driver = newDriver.trim();
+    renderCards(applyFilters());
+    };
+    card.querySelector(".availabilityBtn").onclick = function() {
+        item.availability = item.availability ==== "Available" ? "Unavailable" : "Available";
+        renderCards(applyFilters());
+    };
+    card.querySelector (".deleteBtn").onclick = function () {
+        if (confirm("are you sure you want to delete this vehicle?")) {
+            fleetData = fleetData.filter(x=> x!==item);
+            renderCards(applyFilters());
+        }
+
+        };
+    });
+
+    }
+    function addFleet() {
+        let reg= document.getElementById("reg").value.trim();
+        let category = document.getElementById("category").value;
+        let driver =document.getElemetById("driver").value.trim();
+        let availability = document.getElemetById("availability").value;
+        if(!reg || !category || !driver || !availability) {
+            alert ("All fields are required!");
+            return;
+        }
         
-    </script>
-    
-</body>
-</html>
